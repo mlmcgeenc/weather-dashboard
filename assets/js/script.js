@@ -1,9 +1,9 @@
-var apiKey = "2f28098e5b8068740488df8c6cfa93bb";
+var myNum = "4d1d3a785c5d9d29d73debb3f37fbb0c";
 var conditionsUrl = `https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}`;
 var form = document.getElementById("search");
 
 var fetchData = function (cityName) {
-	var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`;
+	var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${myNum}`;
 	fetch(locationUrl)
 		.then(function (response) {
 			return response.json();
@@ -15,7 +15,7 @@ var fetchData = function (cityName) {
 			var cityLattitude = city[0].lat;
 			var cityLongitude = city[0].lon;
 			fetch(
-				`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLattitude}&lon=${cityLongitude}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`
+				`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLattitude}&lon=${cityLongitude}&exclude=minutely,hourly,alerts&units=imperial&appid=${myNum}`
 			)
 				.then(function (weatherConditionsResponse) {
 					return weatherConditionsResponse.json();
