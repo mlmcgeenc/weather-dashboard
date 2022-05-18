@@ -3,6 +3,10 @@
     color: white;
 }
 
+#current-conditions h3 {
+    display: inline;
+}
+
 .card {
     background-color: #273649;
     color: white;
