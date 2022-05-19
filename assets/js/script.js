@@ -46,14 +46,11 @@ var setCurrentConditionsDisplay = function (weatherConditions) {
 var handleSearch = function (e) {
 	e.preventDefault();
 
-	if (!searchHistory) {
-		var searchHistory = [];
-	} else {
-		fetchData(e.target[0].value);
-		searchHistory.push(e.target[0].value);
-		localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-		e.target[0].value = "";
-	}
+	fetchData(e.target[0].value);
+	searchHistory.push(e.target[0].value);
+	localStorage.setItem("storedSearchHistory", JSON.stringify(searchHistory));
+	buildSearchHistoryList();
+	e.target[0].value = "";
 };
 
 var createDailyCard = function (cardIndex, weatherConditions) {
@@ -88,4 +85,24 @@ var buildFiveDayForecast = function (weatherConditions) {
 	}
 };
 
+var getSearchHistory = function () {
+	var data = localStorage.getItem("storedSearchHistory");
+	searchHistory = JSON.parse(data);
+};
+
+// TODO iterate over arry of search history results and build buttons into ul in search column
+var buildSearchHistoryList = function () {
+	document.querySelector('.search-list').innerHTML = "<ul></ul>";
+	for (i = 0; i < searchHistory.length; ++i) {
+		console.log("buildSearchHistory >>>", searchHistory[i]);
+		var searchItem = document.createElement("button");
+		searchItem.classList.add("btn", "btn-secondary", "col-12", "my-1");
+		searchItem.textContent = searchHistory[i];
+
+		document.querySelector(".search-list ul").appendChild(searchItem);
+	}
+};
+
+getSearchHistory();
+buildSearchHistoryList();
 form.addEventListener("submit", handleSearch);
