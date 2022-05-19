@@ -1,3 +1,9 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 #header {
     background: linear-gradient(30deg, #2f57b7 0%, #2d48a2 16%, #2b3a8e 33%, #282c7b 50%, #241e67 66%, #1f0f55 83%, #1a0043 100%);
     color: white;

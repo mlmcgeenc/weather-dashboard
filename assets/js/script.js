@@ -1,5 +1,6 @@
 var myNum = "4d1d3a785c5d9d29d73debb3f37fbb0c";
 var form = document.getElementById("search");
+var searchHistory = [];
 var weatherConditions = {};
 
 var fetchData = function (cityName) {
@@ -44,8 +45,15 @@ var setCurrentConditionsDisplay = function (weatherConditions) {
 
 var handleSearch = function (e) {
 	e.preventDefault();
-	fetchData(e.target[0].value);
-	e.target[0].value = "";
+
+	if (!searchHistory) {
+		var searchHistory = [];
+	} else {
+		fetchData(e.target[0].value);
+		searchHistory.push(e.target[0].value);
+		localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+		e.target[0].value = "";
+	}
 };
 
 var createDailyCard = function (cardIndex, weatherConditions) {
@@ -70,10 +78,11 @@ var createDailyCard = function (cardIndex, weatherConditions) {
 	cardHumidity.textContent = "Humidity: " + weatherConditions.daily[cardIndex].humidity + " %";
 
 	newCard.append(cardTitle, cardIcon, cardTemp, cardWindSpeed, cardHumidity);
-	document.getElementById("five-day-forecast").appendChild(newCard);
+	document.querySelector("#five-day-forecast .cards").appendChild(newCard);
 };
 
 var buildFiveDayForecast = function (weatherConditions) {
+	document.getElementById("five-day-forecast").innerHTML = "<div class='cards row'></div>";
 	for (i = 1; i < 6; i++) {
 		createDailyCard(i, weatherConditions);
 	}
