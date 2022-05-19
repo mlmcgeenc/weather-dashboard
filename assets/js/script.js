@@ -3,7 +3,7 @@ var form = document.getElementById("search");
 var weatherConditions = {};
 
 var fetchData = function (cityName) {
-	var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${myNum}`;
+	var locationUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${myNum}`;
 	fetch(locationUrl)
 		.then(function (response) {
 			return response.json();
@@ -34,7 +34,7 @@ var fetchData = function (cityName) {
 var setCurrentConditionsDisplay = function (weatherConditions) {
 	document
 		.querySelector("#current-icon")
-		.setAttribute("src", "http://openweathermap.org/img/wn/" + weatherConditions.current.weather[0].icon + ".png");
+		.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherConditions.current.weather[0].icon + ".png");
 	document.getElementById("current-temp").textContent = weatherConditions.current.temp;
 	document.getElementById("current-wind").textContent = weatherConditions.current.wind_speed;
 	document.getElementById("current-humidity").textContent = weatherConditions.current.humidity;
@@ -57,7 +57,7 @@ var createDailyCard = function (cardIndex, weatherConditions) {
 	cardTitle.textContent = moment().add(cardIndex, "days").format(" (M / D / YYYY) ");
 
 	var cardIcon = document.createElement("img");
-	cardIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + weatherConditions.daily[cardIndex].weather[0].icon + ".png");
+	cardIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherConditions.daily[cardIndex].weather[0].icon + ".png");
 	cardIcon.setAttribute("style", "max-width: 4rem;");
 
 	var cardTemp = document.createElement("p");
